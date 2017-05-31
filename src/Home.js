@@ -47,6 +47,9 @@ export default class Home extends Component {
             </View>
           </View>
         </View>
+        <View style={styles.fullName}>
+          <FullName />
+        </View>
         <View style={styles.actionsRow}>
           <Actions />
         </View>
@@ -100,6 +103,15 @@ class Phone extends Component {
   }
 }
 
+@inject("userStore")
+@observer
+class FullName extends Component {
+  render() {
+    console.log("Render Fullname");
+    return <Text>FullName: {this.props.userStore.fullName}</Text>;
+  }
+}
+
 @inject("userStore", "counterStore")
 class Actions extends Component {
   firstNames = ["John", "Ron", "Sam"];
@@ -114,45 +126,59 @@ class Actions extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.row}>
-          <Button
-            onPress={() => this.props.counterStore.increment()}
-            title="Increment Counter"
-            color="#805841"
-          />
-
-          <Button
-            onPress={() => this.props.counterStore.decrement()}
-            title="Decrement Counter"
-            color="#805841"
-          />
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              onPress={() => this.props.counterStore.increment()}
+              title="Increment Counter"
+              color="#805841"
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              onPress={() => this.props.counterStore.decrement()}
+              title="Decrement Counter"
+              color="#805841"
+            />
+          </View>
         </View>
 
         <View style={styles.row}>
-          <Button
-            onPress={() => this.changeFirstName()}
-            title="Change First Name"
-            color="#445665"
-          />
-
-          <Button
-            onPress={() => this.changeLastName()}
-            title="Change Last Name"
-            color="#445665"
-          />
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              onPress={() => this.changeFirstName()}
+              title="Change First Name"
+              color="#445665"
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              style={styles.button}
+              onPress={() => this.changeLastName()}
+              title="Change Last Name"
+              color="#445665"
+            />
+          </View>
         </View>
 
         <View style={styles.row}>
-          <Button
-            onPress={() => this.changeEmail()}
-            title="Change Email"
-            color="#445665"
-          />
-
-          <Button
-            onPress={() => this.changePhone()}
-            title="Change Phone"
-            color="#445665"
-          />
+          <View style={styles.buttonContainer}>
+            <Button
+              onPress={() => this.changeEmail()}
+              title="Change Email"
+              color="#445665"
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              onPress={() => this.changePhone()}
+              title="Change Phone"
+              color="#445665"
+            />
+          </View>
         </View>
       </View>
     );
@@ -200,10 +226,15 @@ const styles = StyleSheet.create({
     flex: 3,
     backgroundColor: "#006E60"
   },
-  actionsRow: {
+  fullName: {
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "#F5A2A2"
+  },
+  actionsRow: {
+    flex: 2,
+    padding: 16
   },
   twoRowsContainer: {
     flex: 1,
@@ -219,5 +250,9 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: "row"
+  },
+  buttonContainer: {
+    flex: 1,
+    padding: 4
   }
 });

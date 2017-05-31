@@ -1,5 +1,5 @@
 /* @flow */
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 export default class UserStore {
   @observable firstName = "Sen";
   @observable lastName = "Appleseed";
@@ -19,5 +19,9 @@ export default class UserStore {
     if (data.phone) {
       this.phone = data.phone;
     }
+  }
+
+  @computed get fullName(): string {
+    return `${this.firstName} ${this.lastName}`;
   }
 }
